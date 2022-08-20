@@ -44,6 +44,7 @@ You need to add
         `* * * * * cd /interviewtask && php artisan schedule:run >> /dev/null 2>&1`
 to crontab to process your import request
 
+There is command `php artisan process:file_uploads` which will run in every 10 minutes and will pickup new uploads. Then it will process it.
 `
 
 

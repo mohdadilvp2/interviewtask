@@ -40,7 +40,7 @@ class FileUploadController extends Controller
             $fileModel->contacts_file_path = $fileNameContacts;
             $fileModel->save();
             return back()
-            	->with('success','Files have been uploaded. We will process files');
+            	->with('success','Files have been uploaded. We will process your files');
         }
    }
 }

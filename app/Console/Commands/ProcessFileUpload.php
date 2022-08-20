@@ -14,7 +14,7 @@ class ProcessFileUpload extends Command
      */
     protected $signature = 'process:file_uploads';
 
-        /**
+    /**
      * The console command description.
      *
      * @var string
@@ -42,7 +42,7 @@ class ProcessFileUpload extends Command
         $fileIds = $files->pluck('id');
         // Update status to progress, So next cron will not pick them, even if cron overlap
         FileUpload::whereIn('id', $fileIds)->update(['status' => FileUpload::STATUS_PROGRESS]);
-        
+
         // Rate limit of trengo api is handled \App\Utils\Trengo
         $trengo = new \App\Utils\Trengo(config('trengo.api_key'));
         foreach ($files as $file) {
@@ -60,7 +60,6 @@ class ProcessFileUpload extends Command
                 list($contactsHeader, $contacts) = $this->getCSVHeaderAndRows($contactsCsv);
             } catch (\Exception $e) {
                 $this->error("File read error, Error: ".$e->getMessage());
-                $this->logHere("");
                 $file->status = FileUpload::STATUS_ERROR;
                 $file->save();
                 return false;
@@ -74,13 +73,13 @@ class ProcessFileUpload extends Command
                     $response = $trengo->createProfile(trim($company['name']));
                     if($response['success']) {
                         $reports['companies_created']++;
-                        // Make a mapping between company_id in csv and in trengo response
+                        // Make a mapping between company_id in csv and trengo response
                         $companiesTrengoIdMapping[$company['id']] = $response['response'];
                     }
                     else {
                         $reports['companies_failed']++;
                         $this->error('Failed to create company '.json_encode(['company' => $company, 'response' => $response]));
-                        $this->logHere("");
+                        
                     }
                 }
             }
@@ -108,7 +107,6 @@ class ProcessFileUpload extends Command
                     }
                     else {
                         $this->error('Failed to create customfields '.json_encode(['header' => $header, 'response' => $response]));
-                        $this->logHere("");
                     }
 
                 }
@@ -136,7 +134,7 @@ class ProcessFileUpload extends Command
                     else {
                         $reports['contacts_failed']++;
                         $this->error('Failed to create contact '.json_encode(['contact' => $contact, 'response' => $response]));
-                        $this->logHere("");
+                        
                     }
                 }
             }
