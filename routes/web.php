@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContactUpload;
+use App\Http\Controllers\FileUploadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,5 +11,5 @@ use App\Http\Controllers\ContactUpload;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [ContactUpload::class, 'createForm']);
-Route::post('/upload-file', [ContactUpload::class, 'fileUpload'])->name('fileUpload');
+Route::get('/', [FileUploadController::class, 'createForm']);
+Route::post('/upload-file', [FileUploadController::class, 'fileUpload'])->name('fileUpload');

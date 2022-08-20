@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-         Schema::create('files', function (Blueprint $table) {
+         Schema::create('file_uploads', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('companies_file_path');

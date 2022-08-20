@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Cron will run every 10 minutes
-        $schedule->command('process:files')->everyTenMinutes();
+        $schedule->command('process:file_uploads')->everyTenMinutes();
     }
 
     /**
