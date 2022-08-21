@@ -167,7 +167,6 @@ class Trengo
         }
         $result['response'] = json_decode($response->getBody()->getContents(), true);
         $result['X-RateLimit-Remaining'] = $response->getHeaderLine('X-RateLimit-Remaining') ?? 0;
-       
         return $result;
     }
 }
