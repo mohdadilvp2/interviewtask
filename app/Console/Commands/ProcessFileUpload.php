@@ -167,9 +167,9 @@ class ProcessFileUpload extends Command
             $this->logHere(print_r($reports, true));
             $this->logHere("Report End");
             // Delete files after processing
-            Storage::disk('local')
+            \Storage::disk('local')
                 ->delete($componiesCsv);
-            Storage::disk('local')->delete($contactsCsv);
+            \Storage::disk('local')->delete($contactsCsv);
             // Update status to done
             $file->status = FileUpload::STATUS_DONE;
             $file->save();
