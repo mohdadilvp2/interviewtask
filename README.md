@@ -60,5 +60,5 @@ There is command `php artisan process:file_uploads` which will run in every 10 m
 ----------
 ## Project Description
 
-1- Upload your companies.csv and contacts.csv 
-2- There is command `php artisan process:file_uploads` which will run in every 10 minutes and will pickup new uploads. Then it will process it.
+- Upload your companies.csv and contacts.csv 
+- There is command `php artisan process:file_uploads` which will run in every 10 minutes and will pickup new uploads. Then it will process it.
