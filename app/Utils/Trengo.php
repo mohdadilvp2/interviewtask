@@ -159,7 +159,7 @@ class Trengo
             // Rate limit issue, So wait for remaining seconds and retry again
             sleep($secondsRemaining + 1);
             return $this->request($url, $method ,$data);
-        }elseif ($code >= 400) {
+        } elseif ($code >= 400) {
             $result['success'] = false;
              
         } else {
