@@ -18,7 +18,7 @@ class Trengo
     private $apiKey;
     private $apiRequestUrl = 'https://app.trengo.com/api/v2/';
 
-    public function __construct($apiKey)
+    public function __construct(string $apiKey)
     {
         $this->apiKey = $apiKey;
     }
@@ -32,7 +32,7 @@ class Trengo
     *
     * @return array.
     */
-    public function createProfile($name){
+    public function createProfile(string $name){
         return $this->request($this->apiRequestUrl . "profiles" , 'POST', ['name' => $name]);
     }
 
@@ -45,7 +45,7 @@ class Trengo
     *
     * @return array.
     */
-    public function getProfile($id){
+    public function getProfile(int $id){
         return $this->request($this->apiRequestUrl . "profiles/".$id , 'GET');
     }
 
@@ -79,7 +79,7 @@ class Trengo
     * @param string $type [PROFILE, CONTACT, TICKET]
     * @return array.
     */
-    public function createCustomField($title, $type) {
+    public function createCustomField(string $title, string $type) {
         return $this->request($this->apiRequestUrl . "custom_fields" , 'POST', ['title' => $title, 'type' => $type]);
     }
 
@@ -92,7 +92,7 @@ class Trengo
     * @param string $name
     * @return array.
     */
-    public function createContact($email, $name) {
+    public function createContact(string $email, ?string $name) {
         return $this->request($this->apiRequestUrl . "channels/".config('trengo.channel_id')."/contacts" , 'POST', ['identifier' => $email, 'name' => $name, 'channel_id' => config('trengo.channel_id')]);
     }
 
@@ -105,7 +105,7 @@ class Trengo
     * @param string $name
     * @return array.
     */
-    public function attachContact($profileId, $contactId, $type = 'EMAIL') {
+    public function attachContact(int $profileId, int $contactId, string $type = "EMAIL") {
         return $this->request($this->apiRequestUrl . "profiles/".$profileId."/contacts" , 'POST', ['contact_id' => $contactId, 'type' => $type]);
     }
 
@@ -119,7 +119,7 @@ class Trengo
     * @param string $value
     * @return array.
     */
-    public function addCustomFieldToContact($contactId, $customFieldId, $value) {
+    public function addCustomFieldToContact(int $contactId, int $customFieldId, string $value) {
         return $this->request($this->apiRequestUrl . "contacts/".$contactId."/custom_fields" , 'POST', ['custom_field_id' => $customFieldId, 'value' => $value]);
     }
 
@@ -132,7 +132,7 @@ class Trengo
      *
      * @return array|bool
      */
-    private function request($url, $method = 'POST', array $data = [] )
+    private function request(string $url, string $method = 'POST', array $data = [] )
     {
         $config =['headers' => ['Authorization' => "Bearer {$this->apiKey}", 'Content-Type' => 'application/json', 'Accept' => 'application/json'], 'http_errors' => false];
         $client = new Client($config);

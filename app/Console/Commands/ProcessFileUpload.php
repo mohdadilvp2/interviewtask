@@ -186,7 +186,7 @@ class ProcessFileUpload extends Command
      *
      * @return array
      */
-    private function getCSVHeaderAndRows($csvPath)
+    private function getCSVHeaderAndRows(string $csvPath)
     {
         $header = [];
         $rows = [];
@@ -216,7 +216,7 @@ class ProcessFileUpload extends Command
      *
      * @return bool
      */
-    private function logHere($string)
+    private function logHere(string $string)
     {
         $this->info($string);
         $this->info("=================================================================================");
