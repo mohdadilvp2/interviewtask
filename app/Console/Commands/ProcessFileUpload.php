@@ -4,6 +4,12 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\FileUpload;
 
+/**
+ * This is used to process new import request
+ *
+ * Class ProcessFileUpload
+ * @package App\Console\Commands
+ */
 class ProcessFileUpload extends Command
 {
     /**
