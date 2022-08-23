@@ -23,7 +23,14 @@ class TrengoTest extends TestCase
     public function test_trengo()
     {
     	$trengo = new \App\Utils\Trengo($this->apiKey);
+    	// Customfields api test
     	$response = $trengo->getCustomFields();
+    	$this->assertArrayHasKey('response', $response);
+
+    	// Profiles test
+    	$response = $trengo->getProfiles();
+    	$this->assertArrayHasKey('success', $response);
+    	$this->assertEquals($response['success'], true);
     	$this->assertArrayHasKey('response', $response);
     }
 }

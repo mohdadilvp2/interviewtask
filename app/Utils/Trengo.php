@@ -50,6 +50,18 @@ class Trengo
     }
 
     /*
+    * get profiles
+    *
+    * @author Adil <mohdadilvp@gmail.com>
+    * @access public
+    *
+    * @return array.
+    */
+    public function getProfiles(){
+        return $this->request($this->apiRequestUrl . "profiles" , 'GET');
+    }
+
+    /*
     * Get all customfields
     *
     * @author Adil <mohdadilvp@gmail.com>
