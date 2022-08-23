@@ -12,11 +12,10 @@ class TrengoTest extends TestCase
 	protected function setUp(): void
 	{
 	    parent::setUp();
-	    $this->apiKey = env('TRENGO_API_KEY', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDRiY2ZiMWJiYTlkNjUzNjJlM2NmODc1ZWY1OTNhY2NlMzE4NmEyMTVhYTM0YTE5YTE2YWQ2Mjk0ZWU1YmRmYmQzYzYzZDBmMzI2ZDRlODMiLCJpYXQiOjE2NjA5NTQxNDYuODk3NTgyLCJuYmYiOjE2NjA5NTQxNDYuODk3NTg0LCJleHAiOjQ3ODUwOTE3NDYuODkyMDUyLCJzdWIiOiI1MTcwODQiLCJzY29wZXMiOltdfQ.K7oVWkSAdTMI6dcb3tQBHg6OHfw5pHad0Di51Bt9-KwVZugjI_ysbPofJ314jna6v6NMX_8Nx5Ehz1dBJyF7sw');
-
+	    $this->apiKey = env('TRENGO_API_KEY');
 	}
     /**
-     * A basic unit test example.
+     * Trengo api test.
      *
      * @return void
      */
@@ -24,13 +23,19 @@ class TrengoTest extends TestCase
     {
     	$trengo = new \App\Utils\Trengo($this->apiKey);
     	// Customfields api test
-    	$response = $trengo->getCustomFields();
-    	$this->assertArrayHasKey('response', $response);
+    	$customFieldsResponse = $trengo->getCustomFields();
+    	$this->assertArrayHasKey('response', $customFieldsResponse);
 
     	// Profiles test
-    	$response = $trengo->getProfiles();
-    	$this->assertArrayHasKey('success', $response);
-    	$this->assertEquals($response['success'], true);
-    	$this->assertArrayHasKey('response', $response);
+    	$profilesResponse = $trengo->getProfiles();
+    	$this->assertArrayHasKey('success', $profilesResponse);
+    	$this->assertEquals($profilesResponse['success'], true);
+    	$this->assertArrayHasKey('response', $profilesResponse);
+    	$this->assertArrayHasKey('data', $profilesResponse['response']);
+    	if(count($profilesResponse['response']['data']) > 0 ) {
+    		$profilId = $profilesResponse['response']['data'][0]['id'];
+    		$profileResponse = $trengo->getProfile($profilId);
+    		$this->assertEquals($profilId, $profileResponse['response']['id']);
+    	}
     }
 }
